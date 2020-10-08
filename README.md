@@ -132,6 +132,21 @@ Now that we have created our `SplashScreen` class we need to go to `main.dart` t
 
 ## Displaying The Splash Screen
 
+In `main.dart` we will be replacing the `home:` widget with an instance of our `splashscreen` class.
+
+First, import the `splashscreen` file into main.dart by. adding 
+`import 'package:tutorial/widgets/splash_screen.dart';`
+
+Now replace the home widget of the `Material App` with this code
+
+    SplashScreen(  
+        seconds: 1,  
+        navigateAfterSeconds: MyHomePage(title: "Reveal Tutorial"),  
+		title: new Text('Reveal Tutorial'),  
+	    image: new Image.asset('assets/images/watering_can.png'),  
+    ),
+
+In this code we are not only creating our splash screen we are also declaring how many `seconds` to display the `Splashscreen`, what the app will present once it finishes displaying `navigateAfterSeconds`, the title test to display, as well as our first use of an asset with the reference to the image we display on the splash screen.
 
 **If you would like to review the code changes and the project up to this point checkout the git branch `splash-screen`.**
 

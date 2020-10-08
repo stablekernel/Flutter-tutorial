@@ -13,19 +13,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: Splash(),
+      home: SplashScreen(
+        seconds: 1,
+        navigateAfterSeconds: MyHomePage(title: "Reveal Tutorial"),
+        title: new Text('Reveal Tutorial'),
+        image: new Image.asset('assets/images/watering_can.png'),
+      ),
       debugShowCheckedModeBanner: false,
-    );
-  }
-}
-class Splash extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SplashScreen(
-      seconds: 1,
-      navigateAfterSeconds: MyHomePage(title: "Reveal Tutorial"),
-      title: new Text('Reveal Tutorial'),
-      image: new Image.asset('assets/images/watering_can.png'),
     );
   }
 }
@@ -72,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

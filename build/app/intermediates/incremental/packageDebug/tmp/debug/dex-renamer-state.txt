@@ -1,4 +1,4 @@
-#Wed Oct 07 15:34:57 EDT 2020
+#Thu Oct 08 13:03:15 EDT 2020
 base.0=/Users/amyroberson/Projects/Flutter-tutorial/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
