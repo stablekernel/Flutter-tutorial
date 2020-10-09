@@ -11,11 +11,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  var _currentTab = 0;
+  final List<Widget> _tabChildren = [
+    RevealScreen(text: new Text('Palm'),
+      image: new Image.asset('assets/images/plant1.jpeg')),
+    RevealScreen(text: new Text('Calathea'),
+        image: new Image.asset('assets/images/plant2.jpeg')),
+    RevealScreen(text: new Text('Succulents'),
+        image: new Image.asset('assets/images/plant3.jpeg')),
+  ];
 
-  void _incrementCounter() {
+  void onTabTapped(int index) {
     setState(() {
-      _counter++;
+      _currentTab = index;
     });
   }
 
@@ -25,40 +33,54 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            FlatButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
+       body: SafeArea(
+           child:  _tabChildren[_currentTab],
+       ),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+        primaryColor: Colors.white,
+        canvasColor: Colors.green[300],
+      ),
+        child: Container(
+          decoration: BoxDecoration(
+          boxShadow: [BoxShadow(color: Colors.black38, blurRadius: 10)]),
+          child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _currentTab,
+              onTap: onTabTapped,
+              items: [
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                'assets/images/rake.png',
+                width: 40,
+                height: 40,
                 ),
-                color: Colors.green,
-              onPressed: () { Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => RevealScreen(text: new Text('Succulents'),
-                      image: new Image.asset('assets/images/plant3.jpeg'))));
-              },
-              child: Text("Next Screen",
-                  style: TextStyle(
-                    color: Colors.white
-                  )
-            )
-            )
-          ],
+                title: Text( "Plants",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset( 'assets/images/shovel.png',
+                  width: 40,
+                  height: 40,
+                ),
+                title: Text( "Plants",
+                  style: TextStyle(color: Colors.white),
+                ),
+                ),
+              BottomNavigationBarItem(
+                icon: Image.asset( 'assets/images/can.png',
+                  width: 40,
+                  height: 40,
+                ),
+                title: Text( "Plants",
+                  style: TextStyle(color: Colors.white),
+                  ),
+                ),
+            ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+        )
+      )
     );
   }
 }
