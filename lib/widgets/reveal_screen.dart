@@ -24,10 +24,9 @@ class _RevealScreenState extends State<RevealScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             widget.text,
-            new SizedBox(
-                height:350.0,
-                child: widget.image
-            ),
+        Padding(
+            padding: EdgeInsets.all(30),
+            child: widget.image)
           ],
         ),
       ),
