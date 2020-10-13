@@ -150,4 +150,173 @@ In this code we are not only creating our splash screen we are also declaring ho
 
 **If you would like to review the code changes and the project up to this point checkout the git branch `splash-screen`.**
 
-## Navigation
+## Navigation ([Flutter Documentation](https://api.flutter.dev/flutter/widgets/Navigator-class.html))
+
+The Splash screen class has given us a peek into flutter navigation, but now we want to begin understand how navigation is used in flutter.
+
+There are two major pieces to navigation in flutter:
+-`Navigator` - This is a provided widget which manages and maintains a stack-based view history
+-`Routes`- These are objects used by the navigator to know which screen or partial screen to display next along with the transition between screen.
+
+With those important types in mind we will begin to update our application to include multiple screen navigations. 
+
+## Navigation Set Up
+
+To prepare for our navigation exploration, we will create a new file in our widgets folder named `home_screen.dart`
+
+In this file we will move the code for `MyHomePage` class as well as `_MyHomePageState`, make sure to include `import 'package:flutter/material.dart';` at the top of `home_screen.dart` and we will need to add `import 'package:tutorial/widgets/home_screen.dart';` to the top of `main.dart` so it can successfully reference `MyHomePage`. 
+
+Before we can explore navigation further we will need to create at least one more screen.
+Once more add a new file inside the widgets directory named `reveal_screen.dart`
+
+We will revisit this class later, but for now we will create a simple screen with an image and text.
+Add this code to `reveal_screen.dart`:
+
+    class RevealScreen extends StatefulWidget {  
+     final Text text;  
+     final Image image;  
+      
+      RevealScreen(  
+          {  
+            @required this.text,  
+		     this.image  
+      });  
+      
+      @override  
+      _RevealScreenState createState() => _RevealScreenState();  
+    }  
+      
+    class _RevealScreenState extends State<RevealScreen> {  
+      
+      @override  
+      Widget build(BuildContext context) {  
+        return Scaffold(  
+          body: Center(  
+            child: Column(  
+              mainAxisAlignment: MainAxisAlignment.center,  
+		      children: <Widget>[  
+	               widget.text,  
+				   new SizedBox(  
+                    height:120.0,  
+				    child: widget.image  
+			      ),  
+		      ],  
+	      ),  
+	     ),  
+      );  
+      }  
+    }
+
+## Initial Navigation
+We will need to add `import 'package:tutorial/widgets/reveal_screen.dart';` to `home_screen.dart` to reference our reveal screen.
+
+Now that we have a screen to navigate to let's add a button to our homeScreen, that will navigate to our reveal screen when tapped by a user. 
+
+To add a button to the home screen create a `FlatButton` under the counter text in the body:
+
+    FlatButton(  
+       shape: RoundedRectangleBorder(  
+          borderRadius: BorderRadius.all(Radius.circular(50)),  
+	      ),  
+       color: Colors.green,  
+       onPressed: () {},  
+       child: Text("Next Screen",  
+       style: TextStyle(  
+            color: Colors.white  
+		    )	  
+	   )  
+    )
+
+This creates a green button with white text for us to add an action. To navigate to our revealScreen add the following code to `onPressed`
+
+    () { Navigator.of(context).push(MaterialPageRoute(  
+        builder: (context) => RevealScreen(text: new Text('Succulents'),  
+										      image: new Image.asset('assets/images/plant3.jpeg'))));  
+    }
+This code calls on the `Navigator` Class to `push` our newly created route on to the view stack. 
+Inside the `push` call we create an instance of `MaterialPageRoute` which will build an instance of our `RevealScreen` with the provided properties. 
+
+Now run the program, you should see the new button on the home screen, once that is tapped you will be presented with the reveal screen. To return to the `HomeScreen` we could add a button that would call ` Navigator.pop(context);`, but instead of exploring that option we will create a Tab Navigation Bar to control the application's routing. 
+
+
+## Creating a Tab Navigation Bar
+To create our tab bar, we first need to create a list of screens to represent each tab inside our `_MyHomePageState`
+
+    final List<Widget> _tabChildren = [  
+      RevealScreen(text: new Text('Palm'),  
+	      image: new Image.asset('assets/images/plant1.jpeg')),  
+      RevealScreen(text: new Text('Calathea'),  
+	      image: new Image.asset('assets/images/plant2.jpeg')),  
+      RevealScreen(text: new Text('Succulents'),  
+	      image: new Image.asset('assets/images/plant3.jpeg')),  
+    ];
+Here we are creating a `RevealScreen` for the three tabs we will have. We also need to add a current tab variable.
+`var _currentTab = 0;`
+This needs to be updated when a tab is pressed so we will add a function to handle that as well
+
+ 
+
+       void onTabTapped(int index) {  
+          setState(() {  
+            _currentTab = index;  
+          });  
+        }
+  With that set up, we will now make some drastic changes to our home screen. Instead of showing our counter and buttons, we will just be displaying our **AppBar** , **BottomNavigationBar**, and the active **Reveal Screen**.
+  
+  To make these changes update the build function of the homePage with this code:
+  
+
+    @override  
+    Widget build(BuildContext context) {  
+      return Scaffold(  
+        appBar: AppBar(  
+          title: Text(widget.title),  
+      ),  
+      body: SafeArea(  
+             child:  _tabChildren[_currentTab],  
+      ),  
+      bottomNavigationBar: Theme(  
+          data: Theme.of(context).copyWith(  
+          primaryColor: Colors.white,  
+	      canvasColor: Colors.green[300],  
+      ),  
+      child: Container(  
+            decoration: BoxDecoration(  
+            boxShadow: [BoxShadow(color: Colors.black38, blurRadius: 10)]),  
+		    child: BottomNavigationBar(  
+              type: BottomNavigationBarType.fixed,  
+		      currentIndex: _currentTab,  
+		      onTap: onTabTapped,  
+		      items: [  
+		                BottomNavigationBarItem(  
+		                  icon: Image.asset('assets/images/rake.png',  
+					      width: 40,  
+					      height: 40,),  
+						  title: Text( "Plants",  
+					      style: TextStyle(color: Colors.white),  
+						  ),  
+					    ),
+					     BottomNavigationBarItem(  
+		                  icon: Image.asset('assets/images/shovel.png',  
+					      width: 40,  
+					      height: 40,),  
+						  title: Text( "Plants",  
+					      style: TextStyle(color: Colors.white),  
+						  ),  
+					    ),
+					     BottomNavigationBarItem(  
+		                  icon: Image.asset('assets/images/can.png',  
+					      width: 40,  
+					      height: 40,),  
+						  title: Text( "Plants",  
+					      style: TextStyle(color: Colors.white),  
+						  ),  
+					    ),    
+				      ],  
+				     ),  
+				    )  
+			      )  
+			    );  
+			  }
+Now we have a bottom navigation bar with three items. When we run the code we can see the navigation items and that tapping them switches our current view without calling on the Navigator class.
+
