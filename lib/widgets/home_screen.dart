@@ -13,11 +13,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var _currentTab = 0;
   final List<Widget> _tabChildren = [
-    RevealScreen(text: new Text('Palm'),
+    RevealScreen(text: new Text('Fig Tree'),
       image: new Image.asset('assets/figTree.png')),
-    RevealScreen(text: new Text('Calathea'),
+    RevealScreen(text: new Text('Eucalyptus'),
         image: new Image.asset('assets/eucalyptus.png')),
-    RevealScreen(text: new Text('Succulents'),
+    RevealScreen(text: new Text('Cactus'),
         image: new Image.asset('assets/cactus.png')),
   ];
 
@@ -55,8 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: 40,
                 height: 40,
                 ),
-                title: Text( "Plants",
-                  style: TextStyle(color: Colors.white),
+                title: Text( "Fig Tree",
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
               BottomNavigationBarItem(
@@ -64,8 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 40,
                   height: 40,
                 ),
-                title: Text( "Plants",
-                  style: TextStyle(color: Colors.white),
+                title: Text( "Eucalyptus",
+                  style: TextStyle(color: Colors.black),
                 ),
                 ),
               BottomNavigationBarItem(
@@ -73,8 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 40,
                   height: 40,
                 ),
-                title: Text( "Plants",
-                  style: TextStyle(color: Colors.white),
+                title: Text( "Cactus",
+                  style: TextStyle(color: Colors.black),
                   ),
                 ),
             ],
