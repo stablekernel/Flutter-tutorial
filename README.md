@@ -313,7 +313,7 @@ This creates a green button with white text for us to add an action. To navigate
 
     () { Navigator.of(context).push(MaterialPageRoute(  
         builder: (context) => RevealScreen(text: new Text('Succulents'),  
-										      image: new Image.asset('assets/images/plant3.jpeg'))));  
+										      image: new Image.asset('assets/cactus.png'))));  
     }
 This code calls on the `Navigator` Class to `push` our newly created route on to the view stack. 
 Inside the `push` call we create an instance of `MaterialPageRoute` which will build an instance of our `RevealScreen` with the provided properties. 
@@ -325,12 +325,12 @@ Now run the program, you should see the new button on the home screen, once that
 To create our tab bar, we first need to create a list of screens to represent each tab inside our `_MyHomePageState`
 
     final List<Widget> _tabChildren = [  
-      RevealScreen(text: new Text('Palm'),  
-	      image: new Image.asset('assets/images/plant1.jpeg')),  
-      RevealScreen(text: new Text('Calathea'),  
-	      image: new Image.asset('assets/images/plant2.jpeg')),  
-      RevealScreen(text: new Text('Succulents'),  
-	      image: new Image.asset('assets/images/plant3.jpeg')),  
+      RevealScreen(text: new Text('Fig Tree'),  
+	      image: new Image.asset('assets/figTree.png')),  
+      RevealScreen(text: new Text('Eucalyptus'),  
+	      image: new Image.asset('assets/eucalyptus.png')),  
+      RevealScreen(text: new Text('Cactus'),  
+	      image: new Image.asset('assets/cactus.png')),  
     ];
 Here we are creating a `RevealScreen` for the three tabs we will have. We also need to add a current tab variable.
 `var _currentTab = 0;`
