@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         seconds: 1,
         navigateAfterSeconds: MyHomePage(title: "Reveal Tutorial"),
         title: new Text('Reveal Tutorial'),
-        image: new Image.asset('assets/images/watering_can.png'),
+        image: new Image.asset('assets/icon-eucalyptus.png'),
       ),
       debugShowCheckedModeBanner: false,
     );
