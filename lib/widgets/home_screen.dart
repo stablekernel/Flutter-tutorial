@@ -14,11 +14,11 @@ class _MyHomePageState extends State<MyHomePage> {
   var _currentTab = 0;
   final List<Widget> _tabChildren = [
     RevealScreen(text: new Text('Palm'),
-      image: new Image.asset('assets/images/plant1.jpeg')),
+      image: new Image.asset('assets/figTree.png')),
     RevealScreen(text: new Text('Calathea'),
-        image: new Image.asset('assets/images/plant2.jpeg')),
+        image: new Image.asset('assets/eucalyptus.png')),
     RevealScreen(text: new Text('Succulents'),
-        image: new Image.asset('assets/images/plant3.jpeg')),
+        image: new Image.asset('assets/cactus.png')),
   ];
 
   void onTabTapped(int index) {
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               items: [
               BottomNavigationBarItem(
                 icon: Image.asset(
-                'assets/images/rake.png',
+                'assets/icon-fig.png',
                 width: 40,
                 height: 40,
                 ),
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               BottomNavigationBarItem(
-                icon: Image.asset( 'assets/images/shovel.png',
+                icon: Image.asset( 'assets/icon-eucalyptus.png',
                   width: 40,
                   height: 40,
                 ),
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ),
               BottomNavigationBarItem(
-                icon: Image.asset( 'assets/images/can.png',
+                icon: Image.asset( 'assets/icon-cactus.png',
                   width: 40,
                   height: 40,
                 ),
