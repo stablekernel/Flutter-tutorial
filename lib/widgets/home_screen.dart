@@ -13,11 +13,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var _currentTab = 0;
   final List<Widget> _tabChildren = [
-    RevealScreen(text: new Text('Fig Tree'),
+    RevealScreen(text: new Text('Fiddle Leaf Fig'),
+      overlayImage: new Image.asset('assets/blur-fig.png'),
       image: new Image.asset('assets/figTree.png')),
     RevealScreen(text: new Text('Eucalyptus'),
+        overlayImage: new Image.asset('assets/blur-eucalyptus.png'),
         image: new Image.asset('assets/eucalyptus.png')),
     RevealScreen(text: new Text('Cactus'),
+        overlayImage: new Image.asset('assets/blur-cactus.png'),
         image: new Image.asset('assets/cactus.png')),
   ];
 

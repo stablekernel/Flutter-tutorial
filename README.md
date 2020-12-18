@@ -406,3 +406,166 @@ This needs to be updated when a tab is pressed so we will add a function to hand
 			  }
 Now we have a bottom navigation bar with three items. When we run the code we can see the navigation items and that tapping them switches our current view without calling on the Navigator class.
 
+##Reveal Feature
+
+Now that we can navigate between screens, lets add some mystery for the user! Instead of instantly displaying the image to the user we will add a swipe to reveal overlay. 
+This will allow us to explore using a third party library and create a more dynamic application.
+
+First we need to declare the third party dependency in our pubspec.yaml file under dependencies.
+```
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.3
+  scratcher: "^1.4.0"
+```
+Now press 'Pub get' in the top right of Android Studios to pull in the library.
+
+With the scratcher library imported into our project we can begin to build our reveal feature. First create a new file in tthe widgets directory named reveal_area.dart
+in this file we will import the material and scratcher libraries.
+```import 'package:flutter/material.dart';
+   import 'package:scratcher/widgets.dart';
+```
+
+In this file we will create our RevealArea widget. This will take in a threshold function used once the user has revealed the threshold percentage of the area, and two images, one 
+image to be revealed and one image to hide the image to be revealed.
+ ``
+```class RevealArea extends StatelessWidget {
+     final Image image;
+     final overlayImage;
+   
+     final scratchKey = GlobalKey<ScratcherState>();
+   
+     final Function onThreshold;
+   
+     RevealArea({
+       this.onThreshold,
+       this.overlayImage,
+       this.image,
+     });
+
+    void reveal() {
+        scratchKey.currentState.reveal();
+    }
+     @override
+     Widget build(BuildContext context) {
+   
+      return Scratcher(
+            key: scratchKey,
+            brushSize: 40,
+            threshold: 45,
+            accuracy: ScratchAccuracy.medium,
+            color: Colors.transparent,
+            image: this.overlayImage,
+            onThreshold: this.onThreshold != null
+                ? this.onThreshold
+                : () {
+              reveal();
+            },
+            child: Container(
+              child: Column(
+                children: [
+                  Container(),
+                  IgnorePointer(child: this.image),
+                ],
+              ),
+            ),
+          );
+        }
+   }
+```
+ With this widget in place, we can now update our RevealScreen widget to allow for user interaction.
+First we need to import our reveal_area widget into our reveal screen widget. 
+```
+import 'package:tutorial/widgets/reveal_area.dart';
+```
+Now that we have imported the RevealArea we can replace the child element of the RevealScreen padding object with 
+```
+child: RevealArea(onThreshold: this.onThreshold(), overlayImage: Image.asset( 'assets/blur-fig.png'), image: this.widget.image,))
+```
+Running this, we can not see the reveal area for each plant screen!
+
+To avoid hard coding the overlay image and having the same blur image for each plant, lets add an overlay image to the Reveal Screen constructor
+```
+class RevealScreen extends StatefulWidget {
+     final Text text;
+     final Image image;
+     final Image overlayImage;
+   
+     RevealScreen(
+         {
+           @required this.text,
+           this.overlayImage,
+           this.image,
+         });
+```
+and we will update the RevealArea creation 
+```
+RevealArea(onThreshold: this.onThreshold(), overlayImage: this.widget.overlayImage, image: this.widget.image,))
+```
+
+Now in the MyHomePage file we will need to update the Reveal Screen constructors to include an overlay image.
+
+```  final List<Widget> _tabChildren = [
+       RevealScreen(text: new Text('Fiddle Leaf Fig'),
+         overlayImage: new Image.asset('assets/blur-fig.png'),
+         image: new Image.asset('assets/figTree.png')),
+       RevealScreen(text: new Text('Eucalyptus'),
+           overlayImage: new Image.asset('assets/blur-eucalyptus.png'),
+           image: new Image.asset('assets/eucalyptus.png')),
+       RevealScreen(text: new Text('Cactus'),
+           overlayImage: new Image.asset('assets/blur-cactus.png'),
+           image: new Image.asset('assets/cactus.png')),
+     ];
+```
+
+With the swipe to reveal feature now in place we will add a button to allow the user to reset the reveal feature and give them a bit of instruction.
+
+Inside the _RevealScreenState class we will add ```bool _imageReavealed = false;``` This will allow the app to keep track of the image state. We will also add a _onReveal and a reset function.
+
+```
+ void _onReveal() {
+    Timer(Duration(seconds: 1), () {
+      setState(() {
+        _imageRevealed = true;
+      });
+    });
+  }
+
+  reset() {
+    setState(() {
+      _imageRevealed = false;
+    });
+  }
+```
+The onReveal function will be passed into the revealArea widget and called onThreshold, the reset function will be called when the user presses the 'START AGAIN' button.
+In the widget build function we will include some logic to display the 'START AGAIN' button once the image has been revealed as well as some logic to give the user instructional text.
+```
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            widget.text,
+            if (!_imageRevealed) Text('Swipe to reveal this plant.'),
+            if (_imageRevealed) OutlineButton(
+                  onPressed: this.reset,
+                  child: Text('START AGAIN')
+              ),
+            Padding(
+              padding: EdgeInsets.all(26),
+              child: _imageRevealed == true ? this.widget.image : RevealArea(onThreshold: _onReveal, overlayImage: this.widget.overlayImage, image: this.widget.image),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+```
+
+Now we have a functioning reveal feature with the ability for the user to restart the process and navigate through the app. The styling of our app could use a bit of work though before we call it complete.
+
+##Styling

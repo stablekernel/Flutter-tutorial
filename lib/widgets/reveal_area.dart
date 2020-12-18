@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scratcher/widgets.dart';
 
-class ScratchArea extends StatelessWidget {
+class RevealArea extends StatelessWidget {
   final Image image;
   final overlayImage;
 
@@ -9,7 +9,7 @@ class ScratchArea extends StatelessWidget {
 
   final Function onThreshold;
 
-  ScratchArea({
+  RevealArea({
     this.onThreshold,
     this.overlayImage,
     this.image,
@@ -21,22 +21,22 @@ class ScratchArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scratcher(
       key: scratchKey,
       brushSize: 40,
       threshold: 40,
       accuracy: ScratchAccuracy.medium,
-      color: Colors.black,
+      color: Colors.transparent,
       image: this.overlayImage,
-      onThreshold: this.onThreshold != null
-          ? this.onThreshold
+      onThreshold: (this.onThreshold != null)
+          ? () {
+                this.onThreshold();
+                this.reveal();
+              }
           : () {
-        reveal();
-        print("Reached threshold");
-      },
+                print('reveal');
+              },
       child: Container(
-        color: Colors.black,
         child: Column(
           children: [
             Container(),
