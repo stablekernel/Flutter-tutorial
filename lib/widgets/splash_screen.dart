@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:core';
 import 'dart:async';
+import 'package:tutorial/utility/colors.dart';
 
 class SplashScreen extends StatefulWidget {
   final int seconds;
@@ -49,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
         children: <Widget>[
           new Container(
             decoration: new BoxDecoration(
-              color: Colors.green[300],
+              color: AppColors.colorGrey,
             ),
           ),
           new Column(
@@ -62,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         new SizedBox(
-                            height:122.5,
+                            height:222.5,
                             child: widget.image
                         ),
                         new Padding(

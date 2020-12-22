@@ -569,3 +569,40 @@ In the widget build function we will include some logic to display the 'START AG
 Now we have a functioning reveal feature with the ability for the user to restart the process and navigate through the app. The styling of our app could use a bit of work though before we call it complete.
 
 ##Styling
+
+While it is not normally wise to wait till the features are built in an application before styling, we have grouped many of the styling instructions together for this tutorial. 
+First, we want to create a colors class. Our application will not have a large amount of colors to use across the app, but many projects will use multiple colors that will need to be organized.
+
+We will add a directory named 'utility' and inside we will create a file 'colors.dart' 
+This will contain our three main colors allowing us to import them when needed.
+```
+import 'package:flutter/cupertino.dart';
+   
+class AppColors {
+  static const colorGrey = Color(0xFFD1DBD8);
+  static const colorLightGrey = Color(0xFFDFE4E7);
+  static const colorHighlightWhite = Color(0xFFFFFFFF);
+}
+```
+
+Starting with the splash screen widget, use `import 'package:tutorial/utility/colors.dart';` to import the colors file, then in our build function replace color.green with 'AppColors.colorGrey'
+This will set the background color of our splash screen.
+
+On the reveal screen we will import the colors as well and update the background to 'AppColors.colorGrey' by adding `backgroundColor: AppColors.colorGrey,` within the Scaffold of our build function.
+
+We also want to update the colors used for our tab bar. In the `home_screen.widget` we will set the canvasColor of the `bottomNavigationBar` to 'AppColors.colorLightGrey'
+
+Also on the home page we will be removing the App Bar, while this is a useful widget it does not fix with our designs. This means we can remove the title property from our home screen class as well as from its constructor.
+
+Now that we have our widgets set to the colors of our designs lets focus on the spacing of our text and their styles.
+For the title of the RevealScreen, we will construct the text widget with a style as we build each screen
+```
+title: new Text('Fiddle Leaf Fig', style: TextStyle(fontSize: 24, fontWeight: FontWeight.normal)),
+```
+In the style property of `Text` we can create a `TextStyle` to set the font color, weight, family and more.
+
+We will also update our instruction text in the reveal screen widget.
+```Text('Swipe to reveal this plant.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal))```
+
+Now that we have updated our font sizes we can see that we need a bit of space between the lines of font. so we can add ```SizedBox(height: 16),``` in the list of children for the column.
+

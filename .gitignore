@@ -1,2 +1,3 @@
-build/
-.dart_tool
+build/*
+.dart_tool*
+.dart_tool/flutter_build

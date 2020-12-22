@@ -3,15 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:scratcher/widgets.dart';
 import 'package:tutorial/widgets/reveal_area.dart';
+import 'package:tutorial/utility/colors.dart';
 
 class RevealScreen extends StatefulWidget {
-  final Text text;
+  final Text title;
   final Image image;
   final Image overlayImage;
 
   RevealScreen(
       {
-        @required this.text,
+        @required this.title,
         this.overlayImage,
         this.image,
       });
@@ -40,18 +41,23 @@ class _RevealScreenState extends State<RevealScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.colorGrey,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            widget.text,
-            if (!_imageRevealed) Text('Swipe to reveal this plant.'),
-            if (_imageRevealed) OutlineButton(
+            widget.title,
+            SizedBox(height: 16),
+            if (!_imageRevealed) Text('Swipe to reveal this plant.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+            if (_imageRevealed) RaisedButton(
                   onPressed: this.reset,
-                  child: Text('START AGAIN')
+                  color: AppColors.colorHighlightWhite,
+                  padding: EdgeInsets.symmetric(vertical:12, horizontal: 16),
+                  elevation: 5,
+                  child: Text('START AGAIN', style: TextStyle(fontSize: 16, color: AppColors.colorGreen))
               ),
             Padding(
-              padding: EdgeInsets.all(26),
+              padding: EdgeInsets.fromLTRB(35, 26, 35, 35),
               child: _imageRevealed == true ? this.widget.image : RevealArea(onThreshold: _onReveal, overlayImage: this.widget.overlayImage, image: this.widget.image)
             )
           ],
