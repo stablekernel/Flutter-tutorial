@@ -13,12 +13,24 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var _currentTab = 0;
   final List<Widget> _tabChildren = [
+<<<<<<< HEAD
     RevealScreen(text: new Text('Palm'),
       image: new Image.asset('assets/images/plant1.jpeg')),
     RevealScreen(text: new Text('Calathea'),
         image: new Image.asset('assets/images/plant2.jpeg')),
     RevealScreen(text: new Text('Succulents'),
         image: new Image.asset('assets/images/plant3.jpeg')),
+=======
+    RevealScreen(text: new Text('Fiddle Leaf Fig'),
+      overlayImage: new Image.asset('assets/blur-fig.png'),
+      image: new Image.asset('assets/figTree.png')),
+    RevealScreen(text: new Text('Eucalyptus'),
+        overlayImage: new Image.asset('assets/blur-eucalyptus.png'),
+        image: new Image.asset('assets/eucalyptus.png')),
+    RevealScreen(text: new Text('Cactus'),
+        overlayImage: new Image.asset('assets/blur-cactus.png'),
+        image: new Image.asset('assets/cactus.png')),
+>>>>>>> styling
   ];
 
   void onTabTapped(int index) {
@@ -51,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               items: [
               BottomNavigationBarItem(
                 icon: Image.asset(
+<<<<<<< HEAD
                 'assets/images/rake.png',
                 width: 40,
                 height: 40,
@@ -75,6 +88,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 title: Text( "Plants",
                   style: TextStyle(color: Colors.white),
+=======
+                'assets/icon-fig.png',
+                width: 40,
+                height: 40,
+                ),
+                title: Text( "Fig Tree",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset( 'assets/icon-eucalyptus.png',
+                  width: 40,
+                  height: 40,
+                ),
+                title: Text( "Eucalyptus",
+                  style: TextStyle(color: Colors.black),
+                ),
+                ),
+              BottomNavigationBarItem(
+                icon: Image.asset( 'assets/icon-cactus.png',
+                  width: 40,
+                  height: 40,
+                ),
+                title: Text( "Cactus",
+                  style: TextStyle(color: Colors.black),
+>>>>>>> styling
                   ),
                 ),
             ],
