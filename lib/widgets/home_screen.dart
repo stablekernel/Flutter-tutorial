@@ -13,14 +13,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var _currentTab = 0;
   final List<Widget> _tabChildren = [
-<<<<<<< HEAD
-    RevealScreen(text: new Text('Palm'),
-      image: new Image.asset('assets/images/plant1.jpeg')),
-    RevealScreen(text: new Text('Calathea'),
-        image: new Image.asset('assets/images/plant2.jpeg')),
-    RevealScreen(text: new Text('Succulents'),
-        image: new Image.asset('assets/images/plant3.jpeg')),
-=======
     RevealScreen(text: new Text('Fiddle Leaf Fig'),
       overlayImage: new Image.asset('assets/blur-fig.png'),
       image: new Image.asset('assets/figTree.png')),
@@ -30,7 +22,6 @@ class _MyHomePageState extends State<MyHomePage> {
     RevealScreen(text: new Text('Cactus'),
         overlayImage: new Image.asset('assets/blur-cactus.png'),
         image: new Image.asset('assets/cactus.png')),
->>>>>>> styling
   ];
 
   void onTabTapped(int index) {
@@ -63,32 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
               items: [
               BottomNavigationBarItem(
                 icon: Image.asset(
-<<<<<<< HEAD
-                'assets/images/rake.png',
-                width: 40,
-                height: 40,
-                ),
-                title: Text( "Plants",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset( 'assets/images/shovel.png',
-                  width: 40,
-                  height: 40,
-                ),
-                title: Text( "Plants",
-                  style: TextStyle(color: Colors.white),
-                ),
-                ),
-              BottomNavigationBarItem(
-                icon: Image.asset( 'assets/images/can.png',
-                  width: 40,
-                  height: 40,
-                ),
-                title: Text( "Plants",
-                  style: TextStyle(color: Colors.white),
-=======
                 'assets/icon-fig.png',
                 width: 40,
                 height: 40,
@@ -113,7 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 title: Text( "Cactus",
                   style: TextStyle(color: Colors.black),
->>>>>>> styling
                   ),
                 ),
             ],
