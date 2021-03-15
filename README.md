@@ -421,7 +421,7 @@ dependencies:
 ```
 Now press 'Pub get' in the top right of Android Studios to pull in the library.
 
-With the scratcher library imported into our project we can begin to build our reveal feature. First create a new file in tthe widgets directory named reveal_area.dart
+With the scratcher library imported into our project we can begin to build our reveal feature. First create a new file in the widgets directory named reveal_area.dart
 in this file we will import the material and scratcher libraries.
 ```import 'package:flutter/material.dart';
    import 'package:scratcher/widgets.dart';
@@ -485,13 +485,16 @@ child: RevealArea(onThreshold: this.onThreshold(), overlayImage: Image.asset( 'a
 ```
 Running this, we can not see the reveal area for each plant screen!
 
-To avoid hard coding the overlay image and having the same blur image for each plant, lets add an overlay image to the Reveal Screen constructor
+To avoid hard coding the overlay image and having the same blur image for each plant, lets add an overlay image to the Reveal Screen constructor.
+Inside the RevealScreen class we will add ```bool _imageReavealed = false;``` This will allow the app to keep track of the image state. We will also add a _onReveal and a reset function when we create the reveal state object. 
+
 ```
 class RevealScreen extends StatefulWidget {
      final Text text;
      final Image image;
      final Image overlayImage;
-   
+     bool _imageRevealed = false;
+
      RevealScreen(
          {
            @required this.text,
@@ -521,20 +524,18 @@ Now in the MyHomePage file we will need to update the Reveal Screen constructors
 
 With the swipe to reveal feature now in place we will add a button to allow the user to reset the reveal feature and give them a bit of instruction.
 
-Inside the _RevealScreenState class we will add ```bool _imageReavealed = false;``` This will allow the app to keep track of the image state. We will also add a _onReveal and a reset function.
-
 ```
  void _onReveal() {
     Timer(Duration(seconds: 1), () {
       setState(() {
-        _imageRevealed = true;
+        widget._imageRevealed = true;
       });
     });
   }
 
   reset() {
     setState(() {
-      _imageRevealed = false;
+      widget._imageRevealed = false;
     });
   }
 ```

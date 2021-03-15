@@ -6,10 +6,12 @@ import 'package:scratcher/widgets.dart';
 import 'package:tutorial/widgets/reveal_area.dart';
 import 'package:tutorial/utility/colors.dart';
 
-class RevealScreen extends StatefulWidget {
+class
+RevealScreen extends StatefulWidget {
   final Text title;
   final Image image;
   final Image overlayImage;
+  bool _imageRevealed = false;
 
   RevealScreen(
       {
@@ -23,19 +25,17 @@ class RevealScreen extends StatefulWidget {
 }
 
 class _RevealScreenState extends State<RevealScreen> {
-  bool _imageRevealed = false;
-
   void _onReveal() {
     Timer(Duration(seconds: 1), () {
       setState(() {
-        _imageRevealed = true;
+        widget._imageRevealed = true;
       });
     });
   }
 
   reset() {
     setState(() {
-      _imageRevealed = false;
+      widget._imageRevealed = false;
     });
   }
 
@@ -49,8 +49,8 @@ class _RevealScreenState extends State<RevealScreen> {
           children: <Widget>[
             widget.title,
             SizedBox(height: 16),
-            if (!_imageRevealed) Text('Swipe to reveal this plant.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
-            if (_imageRevealed) RaisedButton(
+            if (!widget._imageRevealed) Text('Swipe to reveal this plant.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+            if (widget._imageRevealed) RaisedButton(
                   onPressed: this.reset,
                   color: AppColors.colorHighlightWhite,
                   padding: EdgeInsets.symmetric(vertical:12, horizontal: 16),
@@ -59,7 +59,7 @@ class _RevealScreenState extends State<RevealScreen> {
               ),
             Padding(
               padding: EdgeInsets.fromLTRB(35, 26, 35, 35),
-              child: _imageRevealed == true ? this.widget.image : RevealArea(onThreshold: _onReveal, overlayImage: this.widget.overlayImage, image: this.widget.image)
+              child: widget._imageRevealed == true ? this.widget.image : RevealArea(onThreshold: _onReveal, overlayImage: this.widget.overlayImage, image: this.widget.image)
             )
           ],
         ),
