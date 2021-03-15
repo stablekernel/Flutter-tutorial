@@ -228,7 +228,7 @@ In this code you are not only creating a splash screen you are also declaring ho
 
   
 
-****If you would like to review the code changes and the project up to this point checkout the git branch** `splash-screen`**.****
+****If you would like to review the code changes and the project up to this point checkout the git branch** `splash-screen`**.
 
   
 
@@ -249,7 +249,7 @@ To prepare for our navigation exploration, we will create a new file in our widg
 In this file we will move the code for `MyHomePage` class as well as `_MyHomePageState`, make sure to include `import 'package:flutter/material.dart';` at the top of `home_screen.dart` and we will need to add `import 'package:tutorial/widgets/home_screen.dart';` to the top of `main.dart` so it can successfully reference `MyHomePage`. 
 
 Before we can explore navigation further we will need to create at least one more screen.
-Once more add a new file inside the widgets directory named `reveal_screen.dart`
+Once more, add a new file inside the widgets directory named `reveal_screen.dart`
 
 We will revisit this class later, but for now we will create a simple screen with an image and text.
 Add this code to `reveal_screen.dart`:
