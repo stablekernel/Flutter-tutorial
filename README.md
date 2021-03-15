@@ -228,7 +228,7 @@ In this code you are not only creating a splash screen you are also declaring ho
 
   
 
-****If you would like to review the code changes and the project up to this point checkout the git branch** `splash-screen`**.****
+****If you would like to review the code changes and the project up to this point checkout the git branch** `splash-screen`**.
 
   
 
@@ -249,7 +249,7 @@ To prepare for our navigation exploration, we will create a new file in our widg
 In this file we will move the code for `MyHomePage` class as well as `_MyHomePageState`, make sure to include `import 'package:flutter/material.dart';` at the top of `home_screen.dart` and we will need to add `import 'package:tutorial/widgets/home_screen.dart';` to the top of `main.dart` so it can successfully reference `MyHomePage`. 
 
 Before we can explore navigation further we will need to create at least one more screen.
-Once more add a new file inside the widgets directory named `reveal_screen.dart`
+Once more, add a new file inside the widgets directory named `reveal_screen.dart`
 
 We will revisit this class later, but for now we will create a simple screen with an image and text.
 Add this code to `reveal_screen.dart`:
@@ -348,125 +348,6 @@ This needs to be updated when a tab is pressed so we will add a function to hand
   To make these changes update the build function of the homePage with this code:
   
 
-<<<<<<< HEAD
-## Navigation ([Flutter Documentation](https://api.flutter.dev/flutter/widgets/Navigator-class.html))
-
-The Splash screen class has given us a peek into flutter navigation, but now we want to begin understand how navigation is used in flutter.
-
-There are two major pieces to navigation in flutter:
--`Navigator` - This is a provided widget which manages and maintains a stack-based view history
--`Routes`- These are objects used by the navigator to know which screen or partial screen to display next along with the transition between screen.
-
-With those important types in mind we will begin to update our application to include multiple screen navigations. 
-
-## Navigation Set Up
-
-To prepare for our navigation exploration, we will create a new file in our widgets folder named `home_screen.dart`
-
-In this file we will move the code for `MyHomePage` class as well as `_MyHomePageState`, make sure to include `import 'package:flutter/material.dart';` at the top of `home_screen.dart` and we will need to add `import 'package:tutorial/widgets/home_screen.dart';` to the top of `main.dart` so it can successfully reference `MyHomePage`. 
-
-Before we can explore navigation further we will need to create at least one more screen.
-Once more add a new file inside the widgets directory named `reveal_screen.dart`
-
-We will revisit this class later, but for now we will create a simple screen with an image and text.
-Add this code to `reveal_screen.dart`:
-
-    class RevealScreen extends StatefulWidget {  
-     final Text text;  
-     final Image image;  
-      
-      RevealScreen(  
-          {  
-            @required this.text,  
-		     this.image  
-      });  
-      
-      @override  
-      _RevealScreenState createState() => _RevealScreenState();  
-    }  
-      
-    class _RevealScreenState extends State<RevealScreen> {  
-      
-      @override  
-      Widget build(BuildContext context) {  
-        return Scaffold(  
-          body: Center(  
-            child: Column(  
-              mainAxisAlignment: MainAxisAlignment.center,  
-		      children: <Widget>[  
-	               widget.text,  
-				   new SizedBox(  
-                    height:120.0,  
-				    child: widget.image  
-			      ),  
-		      ],  
-	      ),  
-	     ),  
-      );  
-      }  
-    }
-
-## Initial Navigation
-We will need to add `import 'package:tutorial/widgets/reveal_screen.dart';` to `home_screen.dart` to reference our reveal screen.
-
-Now that we have a screen to navigate to let's add a button to our homeScreen, that will navigate to our reveal screen when tapped by a user. 
-
-To add a button to the home screen create a `FlatButton` under the counter text in the body:
-
-    FlatButton(  
-       shape: RoundedRectangleBorder(  
-          borderRadius: BorderRadius.all(Radius.circular(50)),  
-	      ),  
-       color: Colors.green,  
-       onPressed: () {},  
-       child: Text("Next Screen",  
-       style: TextStyle(  
-            color: Colors.white  
-		    )	  
-	   )  
-    )
-
-This creates a green button with white text for us to add an action. To navigate to our revealScreen add the following code to `onPressed`
-
-    () { Navigator.of(context).push(MaterialPageRoute(  
-        builder: (context) => RevealScreen(text: new Text('Succulents'),  
-										      image: new Image.asset('assets/images/plant3.jpeg'))));  
-    }
-This code calls on the `Navigator` Class to `push` our newly created route on to the view stack. 
-Inside the `push` call we create an instance of `MaterialPageRoute` which will build an instance of our `RevealScreen` with the provided properties. 
-
-Now run the program, you should see the new button on the home screen, once that is tapped you will be presented with the reveal screen. To return to the `HomeScreen` we could add a button that would call ` Navigator.pop(context);`, but instead of exploring that option we will create a Tab Navigation Bar to control the application's routing. 
-
-
-## Creating a Tab Navigation Bar
-To create our tab bar, we first need to create a list of screens to represent each tab inside our `_MyHomePageState`
-
-    final List<Widget> _tabChildren = [  
-      RevealScreen(text: new Text('Palm'),  
-	      image: new Image.asset('assets/images/plant1.jpeg')),  
-      RevealScreen(text: new Text('Calathea'),  
-	      image: new Image.asset('assets/images/plant2.jpeg')),  
-      RevealScreen(text: new Text('Succulents'),  
-	      image: new Image.asset('assets/images/plant3.jpeg')),  
-    ];
-Here we are creating a `RevealScreen` for the three tabs we will have. We also need to add a current tab variable.
-`var _currentTab = 0;`
-This needs to be updated when a tab is pressed so we will add a function to handle that as well
-
- 
-
-       void onTabTapped(int index) {  
-          setState(() {  
-            _currentTab = index;  
-          });  
-        }
-  With that set up, we will now make some drastic changes to our home screen. Instead of showing our counter and buttons, we will just be displaying our **AppBar** , **BottomNavigationBar**, and the active **Reveal Screen**.
-  
-  To make these changes update the build function of the homePage with this code:
-  
-
-=======
->>>>>>> styling
     @override  
     Widget build(BuildContext context) {  
       return Scaffold(  
@@ -489,32 +370,6 @@ This needs to be updated when a tab is pressed so we will add a function to hand
 		      currentIndex: _currentTab,  
 		      onTap: onTabTapped,  
 		      items: [  
-<<<<<<< HEAD
-		                BottomNavigationBarItem(  
-		                  icon: Image.asset('assets/images/rake.png',  
-					      width: 40,  
-					      height: 40,),  
-						  title: Text( "Plants",  
-					      style: TextStyle(color: Colors.white),  
-						  ),  
-					    ),
-					     BottomNavigationBarItem(  
-		                  icon: Image.asset('assets/images/shovel.png',  
-					      width: 40,  
-					      height: 40,),  
-						  title: Text( "Plants",  
-					      style: TextStyle(color: Colors.white),  
-						  ),  
-					    ),
-					     BottomNavigationBarItem(  
-		                  icon: Image.asset('assets/images/can.png',  
-					      width: 40,  
-					      height: 40,),  
-						  title: Text( "Plants",  
-					      style: TextStyle(color: Colors.white),  
-						  ),  
-					    ),    
-=======
                   BottomNavigationBarItem(
                     icon: Image.asset(
                     'assets/icon-fig.png',
@@ -543,7 +398,6 @@ This needs to be updated when a tab is pressed so we will add a function to hand
                       style: TextStyle(color: Colors.white),
                       ),
                     ),
->>>>>>> styling
 				      ],  
 				     ),  
 				    )  
@@ -552,8 +406,6 @@ This needs to be updated when a tab is pressed so we will add a function to hand
 			  }
 Now we have a bottom navigation bar with three items. When we run the code we can see the navigation items and that tapping them switches our current view without calling on the Navigator class.
 
-<<<<<<< HEAD
-=======
 ##Reveal Feature
 
 Now that we can navigate between screens, lets add some mystery for the user! Instead of instantly displaying the image to the user we will add a swipe to reveal overlay. 
@@ -717,4 +569,40 @@ In the widget build function we will include some logic to display the 'START AG
 Now we have a functioning reveal feature with the ability for the user to restart the process and navigate through the app. The styling of our app could use a bit of work though before we call it complete.
 
 ##Styling
->>>>>>> styling
+
+While it is not normally wise to wait till the features are built in an application before styling, we have grouped many of the styling instructions together for this tutorial. 
+First, we want to create a colors class. Our application will not have a large amount of colors to use across the app, but many projects will use multiple colors that will need to be organized.
+
+We will add a directory named 'utility' and inside we will create a file 'colors.dart' 
+This will contain our three main colors allowing us to import them when needed.
+```
+import 'package:flutter/cupertino.dart';
+   
+class AppColors {
+  static const colorGrey = Color(0xFFD1DBD8);
+  static const colorLightGrey = Color(0xFFDFE4E7);
+  static const colorHighlightWhite = Color(0xFFFFFFFF);
+}
+```
+
+Starting with the splash screen widget, use `import 'package:tutorial/utility/colors.dart';` to import the colors file, then in our build function replace color.green with 'AppColors.colorGrey'
+This will set the background color of our splash screen.
+
+On the reveal screen we will import the colors as well and update the background to 'AppColors.colorGrey' by adding `backgroundColor: AppColors.colorGrey,` within the Scaffold of our build function.
+
+We also want to update the colors used for our tab bar. In the `home_screen.widget` we will set the canvasColor of the `bottomNavigationBar` to 'AppColors.colorLightGrey'
+
+Also on the home page we will be removing the App Bar, while this is a useful widget it does not fix with our designs. This means we can remove the title property from our home screen class as well as from its constructor.
+
+Now that we have our widgets set to the colors of our designs lets focus on the spacing of our text and their styles.
+For the title of the RevealScreen, we will construct the text widget with a style as we build each screen
+```
+title: new Text('Fiddle Leaf Fig', style: TextStyle(fontSize: 24, fontWeight: FontWeight.normal)),
+```
+In the style property of `Text` we can create a `TextStyle` to set the font color, weight, family and more.
+
+We will also update our instruction text in the reveal screen widget.
+```Text('Swipe to reveal this plant.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal))```
+
+Now that we have updated our font sizes we can see that we need a bit of space between the lines of font. so we can add ```SizedBox(height: 16),``` in the list of children for the column.
+

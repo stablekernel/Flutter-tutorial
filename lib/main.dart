@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.green[900],
       ),
       home: SplashScreen(
-        seconds: 1,
-        navigateAfterSeconds: MyHomePage(title: "Reveal Tutorial"),
+        seconds: 2,
+        navigateAfterSeconds: MyHomePage(),
         title: new Text('Reveal Tutorial'),
-        image: new Image.asset('assets/images/watering_can.png'),
+        image: new Image.asset('assets/cactus.png'),
       ),
       debugShowCheckedModeBanner: false,
     );
