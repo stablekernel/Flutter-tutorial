@@ -607,3 +607,10 @@ We will also update our instruction text in the reveal screen widget.
 
 Now that we have updated our font sizes we can see that we need a bit of space between the lines of font. so we can add ```SizedBox(height: 16),``` in the list of children for the column.
 
+##Release
+
+Now the we have a solid application its time to explore the process needed to submit the application to both the Apple store and the Google Play store.
+There are often updates and adjustments made to the building and uploading steps with these stores so it is best to reference the official Flutter documentation for specific details.
+
+[Apple Store instructions from the Flutter Team](https://flutter.dev/docs/deployment/ios)
+[Google Play instructions from the Flutter Team](https://flutter.dev/docs/deployment/android)
